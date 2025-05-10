@@ -1,0 +1,15 @@
+pandas
+numpy
+scikit-learn
+matplotlib
+seaborn
+nltk
+spacy
+jupyter
+notebook
+tqdm
+xgboost
+lightgbm
+joblib
+tensorflow
+transformers
