@@ -13,3 +13,4 @@ lightgbm
 joblib
 tensorflow
 transformers
+wordcloud
