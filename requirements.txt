@@ -14,3 +14,9 @@ joblib
 tensorflow
 transformers
 wordcloud
+fastapi
+uvicorn
+scikit-learn
+joblib
+pandas
+
