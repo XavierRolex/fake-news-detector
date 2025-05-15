@@ -2,14 +2,16 @@ import joblib
 import re
 import string
 import os
+from app.logging_config import setup_logger
+from app.utils.loader import load_model, load_vectorizer
 
-# OS-independent paths
-MODEL_PATH = os.path.join("models", "ensemble_voting_model.pkl")
-VECTORIZER_PATH = os.path.join("models", "tfidf_vectorizer.pkl")
+logger = setup_logger(__name__)
 
 # Load model and vectorizer once
-model = joblib.load(MODEL_PATH)
-vectorizer = joblib.load(VECTORIZER_PATH)
+logger.info("Loading model and vectorizer...")
+model = load_model()
+vectorizer = load_vectorizer()
+logger.info("Model and vectorizer loaded successfully.")
 
 # Text Cleaning Function
 def clean_text(text: str) -> str:
@@ -23,9 +25,25 @@ def clean_text(text: str) -> str:
 
 # Predict Function
 def predict(text):
+    logger.info("Received prediction request.")
     cleaned_text = clean_text(text)
+    logger.debug(f"Cleaned Text: {cleaned_text}")
+    if not cleaned_text:
+        logger.error("Empty text after cleaning.")
+        return {"error": "Input text is empty after cleaning."}
+    if len(cleaned_text) < 10:
+        logger.error("Text too short for prediction.")
+        return {"error": "Input text is too short for prediction."}
+    if len(cleaned_text) > 5000:
+        logger.error("Text too long for prediction.")
+        return {"error": "Input text is too long for prediction."}
+    logger.info("Transforming text using vectorizer.")
+
+    # Transform the cleaned text using the vectorizer
     vectorized_text = vectorizer.transform([cleaned_text])
     prediction = model.predict(vectorized_text)[0]
+    logger.info(f"Prediction made: {prediction}")
+
     probability = (model.predict_proba(vectorized_text)[0][1] 
                    if hasattr(model, 'predict_proba') else None)
     label = 'Real' if prediction == 1 else 'Fake'
