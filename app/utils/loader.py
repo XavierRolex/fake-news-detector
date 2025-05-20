@@ -1,16 +1,20 @@
 import joblib
 import os
+from dotenv import load_dotenv
 
-MODEL_DIR = "models"
+# Load environment variables
+load_dotenv()
+
+# full paths from .env, or use defaults
+MODEL_PATH = os.getenv("MODEL_PATH", "models/ensemble_voting_model.pkl")
+VECTORIZER_PATH = os.getenv("VECTORIZER_PATH", "models/tfidf_vectorizer.pkl")
 
 def load_vectorizer():
-    path = os.path.join(MODEL_DIR, "tfidf_vectorizer.pkl")
-    if not os.path.exists(path):
-        raise FileNotFoundError(f"Vectorizer not found at {path}")
-    return joblib.load(path)
+    if not os.path.exists(VECTORIZER_PATH):
+        raise FileNotFoundError(f"Vectorizer not found at {VECTORIZER_PATH}")
+    return joblib.load(VECTORIZER_PATH)
 
-def load_model(model_name="ensemble_voting_model.pkl"):
-    path = os.path.join(MODEL_DIR, model_name)
-    if not os.path.exists(path):
-        raise FileNotFoundError(f"Model not found at {path}")
-    return joblib.load(path)
+def load_model():
+    if not os.path.exists(MODEL_PATH):
+        raise FileNotFoundError(f"Model not found at {MODEL_PATH}")
+    return joblib.load(MODEL_PATH)

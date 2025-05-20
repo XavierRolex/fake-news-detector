@@ -7,7 +7,7 @@ from app.exceptions import InvalidTextException
 logger = setup_logger(__name__)
 
 # Load model and vectorizer once
-logger.info("Loading model and vectorizer...")
+logger.info(f"Model and vectorizer loaded successfully from {os.getenv('MODEL_PATH')} and {os.getenv('VECTORIZER_PATH')}.")
 model = load_model()
 vectorizer = load_vectorizer()
 logger.info("Model and vectorizer loaded successfully.")
@@ -40,10 +40,14 @@ def predict(text):
     prediction = model.predict(vectorized_text)[0]
     logger.info(f"Prediction made: {prediction}")
 
-    probability = (model.predict_proba(vectorized_text)[0][1]
-                   if hasattr(model, 'predict_proba') else None)
+    if hasattr(model, 'predict_proba'):
+        probability = model.predict_proba(vectorized_text)[0][1]
+        probability = round(probability, 4)
+    else:
+        probability = 'Not available'
+
     label = 'Real' if prediction == 1 else 'Fake'
     return {
         'label': label,
-        'probability': round(probability, 4) if probability is not None else 'N/A'
+        'probability': probability
     }
