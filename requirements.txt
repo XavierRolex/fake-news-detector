@@ -179,4 +179,6 @@ xgboost==3.0.0
 uvicorn[standard]
 pytest
 httpx
-pytest-cov>=4.1.0python-dotenv==1.1.0
+pytest-cov>=4.1.0
+python-dotenv==1.1.0
+
