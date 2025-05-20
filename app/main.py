@@ -10,9 +10,24 @@ from app.exceptions import (
 
 app = FastAPI(
     title="Fake News Detector API",
-    description="API for detecting fake news using a trained ensemble model.",
-    version="1.0.0"
+    description="🚀 A simple API that detects whether a news article is Fake or Real using a trained ensemble model.",
+    version="1.0.0",
+    swagger_ui_parameters={"syntaxHighlight": {"theme": "obsidian"}},
+    contact={
+        "name": "Nafis Anzum",
+        "url": "https://github.com/XavierRolex",
+        "email": "xavier.rolex@icloud.com",
+    },
+    license_info={
+        "name": "MIT",
+        "url": "https://opensource.org/licenses/MIT",
+    },
+    openapi_tags=[
+        {"name": "Prediction", "description": "Predict whether a news article is fake or real"},
+        {"name": "Health", "description": "Health check for the API"},
+    ]
 )
+
 
 # Register Exception Handlers
 app.add_exception_handler(InvalidTextException, invalid_text_exception_handler)
@@ -31,6 +46,6 @@ app.add_middleware(
 def health_check():
     return {"message": "Fake News Detector API is up and running."}
 
-@app.post("/predict", response_model=PredictionResult)
+@app.post("/predict", response_model=PredictionResult, tags=["Prediction"])
 def predict_news(data: NewsInput):
     return predict(data.text)
