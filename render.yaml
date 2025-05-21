@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: fake-news-detector-api
+    env: python
+    plan: free
+    branch: main  # default branch
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port 10000
+    envVars:
+      - key: MODEL_PATH
+        value: models/ensemble_voting_model.pkl
+      - key: VECTORIZER_PATH
+        value: models/tfidf_vectorizer.pkl
+      - key: LOG_LEVEL
+        value: INFO
+    autoDeploy: true
+    region: oregon  # closest region for users
