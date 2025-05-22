@@ -1,10 +1,50 @@
-__pycache__
+# Ignore Python cache files
+__pycache__/
 *.pyc
 *.pyo
 *.pyd
+
+# Ignore virtual environments
 env/
-venv/
+
+# Ignore logs and raw data
 logs/
 data/
+
+# Ignore macOS system files
 .DS_Store
+
+# Ignore notebooks (dev use only)
+notebooks/
 *.ipynb
+
+# Ignore all models except the best one
+models/*
+!models/ensemble_voting_model.pkl
+!models/tfidf_vectorizer.pkl
+
+
+# Ignore test files
+tests/
+
+# Ignore coverage and other test outputs
+.coverage
+pytest_cache/
+htmlcov/
+*.log
+
+# Ignore Jupyter-related config
+.ipynb_checkpoints/
+
+# Ignore deployment configs not needed in container
+render.yaml
+README.md
+folder_structure.txt
+LICENSE
+
+# General
+.git
+.github
+.vscode/
+.idea/
+
