@@ -1,0 +1,9 @@
+# Dev tools only
+jupyterlab
+notebook
+matplotlib
+seaborn
+tensorflow
+keras
+transformers
+ipykernel
