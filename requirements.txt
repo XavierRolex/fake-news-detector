@@ -5,3 +5,4 @@ xgboost
 joblib
 nltk
 python-dotenv
+httpx
