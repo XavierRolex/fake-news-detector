@@ -179,7 +179,7 @@ Distributed under the **MIT License**. See [`LICENSE`](LICENSE) for details.
 **Nafis Anzum**  
 - ✉️ xavier.rolex@icloud.com  
 - 🔗 [github.com/XavierRolex](https://github.com/XavierRolex)
-- - 💼 [LinkedIn](www.linkedin.com/in/xavier-rolex)
+- 💼 [LinkedIn](www.linkedin.com/in/xavier-rolex)
 
 ---
 
